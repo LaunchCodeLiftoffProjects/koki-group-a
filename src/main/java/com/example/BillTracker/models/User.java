@@ -1,7 +1,7 @@
 package com.example.BillTracker.models;
 
 import java.util.Objects;
-public class User {
+public abstract class User {
 
     private int id;
     private String firstName;

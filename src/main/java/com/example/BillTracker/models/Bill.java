@@ -2,7 +2,7 @@ package com.example.BillTracker.models;
 
 import java.util.Date;
 
-public class Bill {
+public abstract class Bill {
 
     private int id;
     private double amount;

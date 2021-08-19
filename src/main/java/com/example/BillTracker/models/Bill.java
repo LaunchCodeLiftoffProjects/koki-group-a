@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
-public class Bill {
+public  class Bill {
 
     private int id;
     private double amount;

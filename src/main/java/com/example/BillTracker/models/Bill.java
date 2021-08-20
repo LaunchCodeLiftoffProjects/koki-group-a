@@ -1,5 +1,6 @@
 package com.example.BillTracker.models;
 
+import javax.persistence.Entity;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -7,9 +8,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
-public  class Bill {
+@Entity
+public class Bill extends AbstractEntity {
 
-    private int id;
     private double amount;
     private String name;
     private Date date;

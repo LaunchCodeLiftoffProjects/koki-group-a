@@ -13,7 +13,7 @@ public class DashboardController {
     //test version
     @GetMapping("dashboard")
     public String dashboard() {
-        return "dashboard";
+        return "profile";
     }
 
 //    //import name, db info

@@ -117,3 +117,10 @@ color: o;
 #nav .active {
   color: #CECECE;;
 }
+
+@media only screen and (max-width: 770px) {
+table{
+margin-left:0%;
+margin-right:0%
+}
+}

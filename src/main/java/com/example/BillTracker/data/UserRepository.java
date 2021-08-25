@@ -1,4 +1,4 @@
-package com.example.BillTracker.models.data;
+package com.example.BillTracker.data;
 import com.example.BillTracker.models.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

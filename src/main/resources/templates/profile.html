@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Bill Tracker</title>
   <link href="../css/jass.css" rel="stylesheet" />
   <link href="../css/style.css" rel="stylesheet" />
@@ -21,8 +22,8 @@
   <div class="nav-wrapper #424242 grey darken-3">
     <a href="#" class="brand-logo ">Bill Tracker</a>
     <ul id="nav-mobile" class="right hide-on-sm-and-down">
-      <li><a href="index.html">Add a Bill</a></li>
-      <li><a href="index.html">Logout</a></li>
+      <li><a href="/bill/create-bill">Add a Bill</a></li>
+      <li><a href="index">Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -74,7 +75,8 @@
     </tr>
     </tbody>
   </table>
-  <button class="add-bill-button btn btn-sm btn-danger">Create a new bill</button>
+  <a href="/bill/create-bill">
+  <button class="add-bill-button btn btn-sm btn-danger">Create a new bill</button></a>
 </div>
 <!------------------------ Sample chart, should eventually use database data and chart API------------>
 <h4>How are you spending your money?</h4>

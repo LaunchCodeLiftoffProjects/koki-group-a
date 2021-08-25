@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/> <!-- Note the closing '/' character -->
+    <title>Title</title>
+</head>
+<body>
+<form method = "post">
+
+    <label>Name
+        <input th:field=${bill.name}>
+    </label>
+    <p th:errors="${bill.name}"></p>
+
+    <label>Amount
+      <input th:field=${bill.amount}>
+    </label>
+    <p th:errors="${bill.amount}"></p>
+
+    <label>Due Date
+       <input th:field=${bill.billDueDate}>
+    </label>
+    <p th:errors="${bill.billDueDate}"></p>
+
+    <label>Type of Bill
+       <input th:field=${bill.type}>
+    </label>
+   <p th:errors="${bill.type}"></p>
+
+    <input type="submit" value="Create">
+
+</form>
+</body>
+</html>

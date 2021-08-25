@@ -13,7 +13,13 @@ public class DashboardController {
     //test version
     @GetMapping("dashboard")
     public String dashboard() {
-        return "profile";
+        return "dashboard";
+    }
+
+    //create a bill
+    @GetMapping("create-bill")
+    public String createBill() {
+        return "bill/create-bill";
     }
 
 //    //import name, db info

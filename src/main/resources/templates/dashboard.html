@@ -1,12 +1,86 @@
 <!DOCTYPE html>
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <title>Bill Tracker</title>
+    <link href="../css/jass.css" rel="stylesheet" />
+    <link href="../css/style.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <link rel = "stylesheet"
+          href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <script type = "text/javascript"
+            src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" integrity="sha512-qzgd5cYSZcosqpzpn7zF2ZId8f/8CHmFKZ8j7mU4OUXTNRd5g+ZHBPsgKEwoqxCtdQvExE5LprwwPAgoicguNg==" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<h1>test dashboard for controller</h1>
+<nav>
+    <div class="nav-wrapper #424242 grey darken-3">
+        <a href="#" class="brand-logo ">Bill Tracker</a>
+        <ul id="nav-mobile" class="right hide-on-sm-and-down">
+            <li><a href="/bill/create-bill">Add a Bill</a></li>
+            <li><a href="index">Logout</a></li>
+        </ul>
+    </div>
+</nav>
 
+<!------------------------ Insert first name into H2 ------------------------>
+<h2>Username's Dashboard</h2>
+
+<!------------------------ Sample table, should eventual use database data ------------>
+<div class="col-md-8 bill-list">
+    <table class="tablesorter">
+        <thead>
+        <tr>
+            <th class="table-header">Name</th>
+            <th class="table-header">Amount Due</th>
+            <th class="table-header">Due Date</th>
+            <th class="table-header">Bill Type</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr class="table-row">
+            <td>Netflix</td>
+            <td>$15.00</td>
+            <td>08/19/2021</td>
+            <td>Subscription</td>
+            <td><button class="btn btn-sm btn-danger">DELETE</button></td>
+        </tr>
+        <tr class="table-row">
+            <td>Hulu</td>
+            <td>$14.00</td>
+            <td>08/30/2021</td>
+            <td>Subscription</td>
+            <td><button class="btn btn-sm btn-danger">DELETE</button></td>
+        <tr>
+        <tr class="table-row">
+            <td>Spire</td>
+            <td>$45.00</td>
+            <td>09/09/2021</td>
+            <td>Utility</td>
+            <td><button class="btn btn-sm btn-danger">DELETE</button></td>
+        </tr>
+
+        <tr class="table-row">
+            <td>Rent</td>
+            <td>$800.00</td>
+            <td>09/01/2021</td>
+            <td>Housing</td>
+            <td><button class="btn btn-sm btn-danger">DELETE</button></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/bill/create-bill">
+        <button class="add-bill-button btn btn-sm btn-danger">Create a new bill</button></a>
+</div>
+<!------------------------ Sample chart, should eventually use database data and chart API------------>
+<h4>How are you spending your money?</h4>
+<img class="sample-chart" src="../assets/sample-chart.png" />
 </body>
+<script src="../js/profile.js"></script>
 </html>

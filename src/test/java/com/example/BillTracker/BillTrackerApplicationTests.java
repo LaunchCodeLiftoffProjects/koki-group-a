@@ -37,11 +37,11 @@ class BillTrackerApplicationTests {
 	}
 
 	//TODO: constructor sets User model properly
-	@Test
-	public void testSetUser() {
-		User test_user = new User("John", "Smith", "js111@email.com");
-		assertNotNull(test_user);
-	}
+//	@Test
+//	public void testSetUser() {
+//		User test_user = new User("John", "Smith", "js111@email.com");
+//		assertNotNull(test_user);
+//	}
 
 
 }

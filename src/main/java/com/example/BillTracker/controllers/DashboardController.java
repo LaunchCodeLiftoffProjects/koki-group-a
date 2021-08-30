@@ -12,9 +12,7 @@ public class DashboardController {
 
     //test version
     @GetMapping("dashboard")
-    public String dashboard() {
-        return "dashboard";
-    }
+    public String dashboard() { return "dashboard"; }
 
     //create a bill
     @GetMapping("create-bill")

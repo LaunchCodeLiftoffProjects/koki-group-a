@@ -21,7 +21,7 @@
   <div class="nav-wrapper #424242 grey darken-3">
     <a href="#" class="brand-logo ">Bill Tracker</a>
     <ul id="nav-mobile" class="right hide-on-sm-and-down">
-      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="/dashboard">Dashboard</a></li>
       <li><a href="index.html">Logout</a></li>
     </ul>
   </div>
@@ -34,23 +34,23 @@
 
     <form  method = "post" class="form new-bill-form">
       <div class="form-group">
-        <label for="bill-name">✉️ Bill Name:</label>
+       <label for="bill-name">✉️ Bill Name:</label>
         <input th:field=${bill.name} class="form-input" type="text" id="bill-name" name="bill-name" />
         <p th:errors="${bill.name}"></p>
       </div>
       <div class="form-group">
-        <label th:field=${bill.amount} for="bill-amount">💰 Amount:</label>
-        <input class="form-input" type="text" id="bill-amount" name="bill-amount" />
+        <label for="bill-amount">💰 Amount:</label>
+        <input th:field=${bill.amount} class="form-input" type="text" id="bill-amount" name="bill-amount" />
         <p th:errors="${bill.amount}"></p>
       </div>
       <div class="form-group">
-        <label th:field=${bill.billDueDate} for="due-date">🗓️ Due Date:</label>
-        <input class="form-input datepicker" type="date" id="due-date" name="due-date" />
+        <label for="due-date">🗓️ Due Date:</label>
+        <input th:field=${bill.billDueDate} class="form-input datepicker" type="date" id="due-date" name="due-date" />
         <p th:errors="${bill.billDueDate}"></p>
       </div>
       <div class="form-group">
-        <label th:field=${bill.type} for="bill-type">🗂️ Bill Type:</label>
-        <input class="form-input" type="text" id="bill-type" name="bill-type"></input>
+        <label for="bill-type">🗂️ Bill Type:</label>
+        <input th:field=${bill.type} class="form-input" type="text" id="bill-type" name="bill-type">
         <p th:errors="${bill.type}"></p>
       </div>
       <div class="form-group">
@@ -58,5 +58,6 @@
       </div>
     </form>
   </div>
+</div>
 </body>
 </html>

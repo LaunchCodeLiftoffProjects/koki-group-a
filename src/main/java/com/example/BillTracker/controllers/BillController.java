@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 import javax.validation.Valid;
 
 @Controller
@@ -35,7 +36,8 @@ public class BillController {
         }
 
         billRepository.save(newBill);
-        return "profile";
+        model.addAttribute("bill", billRepository.findAll());
+        return "dashboard";
     }
 
 

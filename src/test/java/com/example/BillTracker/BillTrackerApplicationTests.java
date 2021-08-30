@@ -36,12 +36,12 @@ class BillTrackerApplicationTests {
 		assertNotNull(test_bill);
 	}
 
-	//TODO: constructor sets User model properly
-	@Test
-	public void testSetUser() {
-		User test_user = new User("John", "Smith", "js111@email.com");
-		assertNotNull(test_user);
-	}
+//	//TODO: constructor sets User model properly
+//	@Test
+//	public void testSetUser() {
+//		User test_user = new User("John", "Smith", "js111@email.com");
+//		assertNotNull(test_user);
+//	}
 
 
 }

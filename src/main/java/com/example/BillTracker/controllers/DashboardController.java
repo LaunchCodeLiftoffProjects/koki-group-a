@@ -12,10 +12,7 @@ public class DashboardController {
 
     //test version
     @GetMapping("dashboard")
-    public String dashboard(Model model) {
-        model.addAttribute("test", "hello world");
-        return "dashboard";
-    }
+    public String dashboard() { return "dashboard"; }
 
     //create a bill
     @GetMapping("create-bill")

@@ -1,11 +1,15 @@
 package com.example.BillTracker.models;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 @Entity
@@ -16,6 +20,10 @@ public class Bill extends AbstractEntity {
     private Date date;
     private String billDueDate;
     private String type;
+
+    @JoinColumn(name = "bill_id")
+    @OneToMany
+    private List<Bill> bills = new ArrayList<>();
 
     public Bill(double amount, String name, Date date, String billDueDate, String type) {
         this.amount = amount;

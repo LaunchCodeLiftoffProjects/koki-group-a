@@ -1,5 +1,6 @@
 package com.example.BillTracker.controllers;
 
+import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,12 @@ public class DashboardController {
 
     //test version
     @GetMapping("dashboard")
-    public String dashboard() {
+    public String dashboard(Model model) {
+        String test = "hello world!";
+        Gson gson = new Gson();
+        String jsonTest = gson.toJson(test);
+        model.addAttribute("test", jsonTest);
+
         return "profile";
     }
 

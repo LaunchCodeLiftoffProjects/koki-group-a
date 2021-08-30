@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Bill Tracker</title>
@@ -88,7 +89,7 @@
   </form>
   <div id="piechart" class="chart"></div>
 </section>
+<th:block th:replace="fragments :: chart-script"></th:block>
 </body>
-<script type="text/javascript" src="js/chart.js"></script>
 <script src="../js/profile.js"></script>
 </html>

@@ -15,6 +15,7 @@
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" integrity="sha512-qzgd5cYSZcosqpzpn7zF2ZId8f/8CHmFKZ8j7mU4OUXTNRd5g+ZHBPsgKEwoqxCtdQvExE5LprwwPAgoicguNg==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
 
@@ -58,7 +59,16 @@
 </div>
 <!------------------------ Sample chart, should eventually use database data and chart API------------>
 <h4>How are you spending your money?</h4>
-<img class="sample-chart" src="../assets/sample-chart.png" />
+<section class="chartContainer">
+    <form id="form1" name="form1" onchange="drawChart()" >
+        <select id="thedropdown">
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+        </select>
+    </form>
+    <div id="piechart" class="chart"></div>
+</section>
+<th:block th:replace="fragments :: chart-script"></th:block>
 </body>
 <script src="../js/profile.js"></script>
 </html>

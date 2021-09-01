@@ -36,8 +36,7 @@ public class BillController {
         }
 
         billRepository.save(newBill);
-        model.addAttribute("bill", billRepository.findAll());
-        return "dashboard";
+        return "redirect:/dashboard";
     }
 
 

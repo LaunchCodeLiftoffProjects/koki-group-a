@@ -46,13 +46,20 @@
         </thead>
 
         <tbody>
+
+
         <tr th:each="bills : ${bill}" class="table-row">
             <td th:text="${bills.name}"></td>
             <td th:text="${bills.amount}"></td>
             <td th:text="${bills.billDueDate}"></td>
             <td th:text="${bills.type}"></td>
-            <td><button class="btn btn-sm btn-danger">DELETE</button></td>
+            <form method = "post">
+            <td>
+                <button type="submit" name="billIds" th:value="${bills.id}" class="btn btn-sm btn-danger">DELETE</button>
+            </td>
+            </form>
         </tr>
+
 
         </tbody>
     </table>

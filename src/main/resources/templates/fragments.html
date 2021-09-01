@@ -14,9 +14,10 @@
 
     var test = [[${test}]];
 
+    var billData = [[${bills}]];
+
     google.charts.load('current', {'packages':['corechart']});
           google.charts.setOnLoadCallback(drawChart);
-
 
         function drawChart() {
          timeframe = document.getElementById("thedropdown").value;

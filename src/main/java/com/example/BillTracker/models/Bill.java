@@ -82,6 +82,14 @@ public class Bill extends AbstractEntity {
         this.billDueDate = billDueDate;
     }
 
+    public List<Bill> getBills() {
+        return bills;
+    }
+
+    public void setBills(List<Bill> bills) {
+        this.bills = bills;
+    }
+
     public LocalDate convertDateStringToDate(String stringDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.ENGLISH);
         LocalDate dueDate = LocalDate.parse(stringDate, formatter);

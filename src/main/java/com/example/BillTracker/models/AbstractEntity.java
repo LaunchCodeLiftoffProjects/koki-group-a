@@ -22,4 +22,6 @@ public abstract class AbstractEntity {
         AbstractEntity that = (AbstractEntity) o;
         return id == that.id;
     }
+
+    public abstract boolean isMatchingPassword(String password);
 }

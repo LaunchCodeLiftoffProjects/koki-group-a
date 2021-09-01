@@ -20,6 +20,10 @@ public class User extends AbstractEntity {
 
     public User() {}
 
+    public User(String username, String password) {
+        super();
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -55,5 +59,10 @@ public class User extends AbstractEntity {
     @Override
     public int hashCode() {
         return Objects.hash(getPassword(), getId());
+    }
+
+    @Override
+    public boolean isMatchingPassword(String password) {
+        return false;
     }
 }

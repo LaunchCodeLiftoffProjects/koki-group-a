@@ -88,4 +88,8 @@ public class Bill extends AbstractEntity {
         return dueDate;
     }
 
+    @Override
+    public boolean isMatchingPassword(String password) {
+        return false;
+    }
 }

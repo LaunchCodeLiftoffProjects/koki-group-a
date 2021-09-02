@@ -12,15 +12,39 @@
 <th:block th:fragment="chart-script">
   <script th:inline="javascript">
 
-    var test = [[${test}]];
-
-    var billData = [[${bills}]];
-
     google.charts.load('current', {'packages':['corechart']});
           google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
          timeframe = document.getElementById("thedropdown").value;
+
+          var billDataJson = [[${billDataJson}]];
+          var billObjects = JSON.parse(billDataJson);
+<!--          console.log(billObjects);-->
+
+          const typeAndAmountsObjArray = [];
+          typeAndAmountsObjArray.push({type: "stuff", amount: 0.02});
+
+          for (let i = 0; i < billObjects.length; i++) {
+            const type = billObjects[i].type;
+            const amount = billObjects[i].amount;
+
+            typeExistsInArray = false;
+
+            for (let j = 0; j < typeAndAmountsObjArray.length; j++) {
+              if (type === typeAndAmountsObjArray[i].type) {
+                typeExistsInArray = true;
+                typeAndAmountsObjArray[i].amount += amount;
+              }
+            }
+
+            if (!typeExistsInArray) {
+              typeAndAmountsObjArray.push({type: type, amount: amount});
+            }
+
+          }
+
+<!--          console.log(typeAndAmountsObjArray);-->
 
          info = [{time: "weekly", entertainment: 40, food: 8, commute: 4, car: 3, phone: 40},
          {time: "monthly", entertainment: 45, food: 9, commute: 3, car: 5, phone: 50}
@@ -35,7 +59,7 @@
            phone = info[i].phone;
 
         }// end if
-        } // end for
+        }// end for
 
         var data = google.visualization.arrayToDataTable([
               ['Bill', 'Dollars'],
@@ -45,6 +69,7 @@
               ['Car',      car],
               ['Phone',    phone]
             ]);
+
             var options = {
               title: 'Spending Data',
               colors: ['orange','#00cc33', 'pink', 'yellow','lightblue'],

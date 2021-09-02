@@ -1,5 +1,8 @@
 package com.example.BillTracker.controllers;
 
+import com.example.BillTracker.data.BillRepository;
+import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,10 +12,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class DashboardController {
 
+    @Autowired
+    private BillRepository billRepository;
 
     //test version
     @GetMapping("dashboard")
-    public String dashboard() { return "dashboard"; }
+    public String dashboard(Model model) {
+        Gson gson = new Gson();
+        String billDataJson = gson.toJson(billRepository.findAll());
+        model.addAttribute("billDataJson", billDataJson);
+        return "dashboard";
+    }
 
     //create a bill
     @GetMapping("create-bill")

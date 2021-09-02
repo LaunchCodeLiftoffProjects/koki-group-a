@@ -18,33 +18,49 @@
         function drawChart() {
          timeframe = document.getElementById("thedropdown").value;
 
+<!--Gets bill JSON from controller-->
+
           var billDataJson = [[${billDataJson}]];
           var billObjects = JSON.parse(billDataJson);
-<!--          console.log(billObjects);-->
 
           const typeAndAmountsObjArray = [];
-          typeAndAmountsObjArray.push({type: "stuff", amount: 0.02});
+
+<!--Loops through bills and adds to new array, checks to see if type is in new array-->
 
           for (let i = 0; i < billObjects.length; i++) {
             const type = billObjects[i].type;
             const amount = billObjects[i].amount;
 
-            typeExistsInArray = false;
+            let typeExistsInArray = false;
 
-            for (let j = 0; j < typeAndAmountsObjArray.length; j++) {
-              if (type === typeAndAmountsObjArray[i].type) {
-                typeExistsInArray = true;
-                typeAndAmountsObjArray[i].amount += amount;
+<!--If type exists in array, add amount of current bill to existing type-->
+
+            if (typeAndAmountsObjArray.length > 0) {
+              for (let j = 0; j < typeAndAmountsObjArray.length; j++) {
+                if (type === typeAndAmountsObjArray[j].type) {
+                  typeExistsInArray = true;
+                  typeAndAmountsObjArray[j].amount += amount;
+                  break;
+                }
               }
             }
 
             if (!typeExistsInArray) {
               typeAndAmountsObjArray.push({type: type, amount: amount});
             }
-
           }
 
-<!--          console.log(typeAndAmountsObjArray);-->
+          const chartData = [];
+          chartData.push(['Bill', 'Dollars']);
+
+<!--Convert object array to array of arrays-->
+
+          typeAndAmountsObjArray.map((item, index) => {
+            let innerChartData = [
+              item.type, item.amount
+            ];
+            chartData.push(innerChartData);
+          });
 
          info = [{time: "weekly", entertainment: 40, food: 8, commute: 4, car: 3, phone: 40},
          {time: "monthly", entertainment: 45, food: 9, commute: 3, car: 5, phone: 50}
@@ -61,14 +77,7 @@
         }// end if
         }// end for
 
-        var data = google.visualization.arrayToDataTable([
-              ['Bill', 'Dollars'],
-              ['Entertainment',     entertainment],
-              ['Food',     food],
-              ['Commute',  commute],
-              ['Car',      car],
-              ['Phone',    phone]
-            ]);
+        var data = google.visualization.arrayToDataTable(chartData);
 
             var options = {
               title: 'Spending Data',

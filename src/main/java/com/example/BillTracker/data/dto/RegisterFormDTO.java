@@ -1,6 +1,6 @@
 package com.example.BillTracker.data.dto;
 
-public class RegisterFormDTO extends LoginFormDTO{
+public class RegisterFormDTO extends LoginFormDTO {
 
     private String verifyPassword;
 

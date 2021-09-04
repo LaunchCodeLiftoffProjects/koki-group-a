@@ -11,18 +11,19 @@ public class User extends AbstractEntity {
     private String password;
     private String email;
 
-    public User(String firstName, String lastName, String password, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.email = email;
-    }
-
     public User() {}
 
-    public User(String username, String password) {
-        super();
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
+
+//    public User(String firstName, String lastName, String password, String email) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.password = password;
+//        this.email = email;
+//    }
 
     public String getFirstName() {
         return firstName;
@@ -63,6 +64,6 @@ public class User extends AbstractEntity {
 
     @Override
     public boolean isMatchingPassword(String password) {
-        return false;
+        return true;
     }
 }

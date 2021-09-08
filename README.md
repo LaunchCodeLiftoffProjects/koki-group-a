@@ -1,4 +1,5 @@
 # BillPaid
+  ![badge](https://img.shields.io/badge/License-MIT-Green)
 
 # Description
 BillPaid is a bill tracking application that provides the user with multiple ways of viewing their planned expenses.

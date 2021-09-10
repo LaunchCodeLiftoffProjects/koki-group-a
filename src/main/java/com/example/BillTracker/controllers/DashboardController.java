@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import javax.swing.*;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -21,26 +24,42 @@ public class DashboardController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("dashboard")
-    //public String dashboard(Model model) {
-    public String dashboard(@RequestParam(required = false) Integer id, Model model) {
-        Gson gson = new Gson();
+    private static final String userSessionKey = "user";
 
-        if (id == null) {
-            model.addAttribute("bill", billRepository.findAll());
-        } else {
-            Optional<User> bills = userRepository.findById(id);
-            if (bills.isEmpty()) {
-                model.addAttribute("title", "No bills yet");
-            } else {
-                User userBills = bills.get();
-                model.addAttribute("bill", userBills.getBills());
-            }
+    public User getUserFromSession(HttpSession session) {
+        Integer userId = (Integer) session.getAttribute(userSessionKey);
+        if (userId == null) {
+            return null;
         }
 
-        String billDataJson = gson.toJson(billRepository.findAll());
-        model.addAttribute("billDataJson", billDataJson);
-       // model.addAttribute("bill", billRepository.findAll());
+        Optional<User> user = userRepository.findById(userId);
+
+        if (user.isEmpty()) {
+            return null;
+        }
+
+        return user.get();
+    }
+
+    @GetMapping("dashboard")
+    public String dashboard(HttpSession session, Model model) {
+        Gson gson = new Gson();
+
+        Integer userId = (Integer) session.getAttribute(userSessionKey);
+
+        Optional<User> optUser = userRepository.findById(userId);
+        List<Bill> bills;
+        if (optUser.isPresent()) {
+            User user = (User) optUser.get();
+            bills = user.getBills();
+            if (bills == null) {
+                model.addAttribute("title", "No bills yet");
+            } else {
+                String billDataJson = gson.toJson(bills);
+                model.addAttribute("billDataJson", billDataJson);
+                model.addAttribute("bill", bills);
+            }
+        }
         return "dashboard"; }
 
     @GetMapping("create-bill")

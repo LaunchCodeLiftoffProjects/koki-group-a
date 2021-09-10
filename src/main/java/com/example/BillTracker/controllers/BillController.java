@@ -64,6 +64,4 @@ public class BillController {
 
         return "redirect:/dashboard";
     }
-
-
 }

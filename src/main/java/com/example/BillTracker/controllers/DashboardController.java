@@ -55,8 +55,8 @@ public class DashboardController {
             if (bills == null) {
                 model.addAttribute("title", "No bills yet");
             } else {
-                String billDataJson = gson.toJson(bills);
-                model.addAttribute("billDataJson", billDataJson);
+//                String billDataJson = gson.toJson(bills);
+////                model.addAttribute("billDataJson", billDataJson);
                 model.addAttribute("bill", bills);
             }
         }

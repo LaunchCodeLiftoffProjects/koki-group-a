@@ -34,12 +34,14 @@ public class DashboardController {
     @GetMapping("dashboard")
     //public String dashboard(Model model) {
     //public String dashboard(@RequestParam(required = false) Integer id, HttpServletRequest request, User user, Model model) {
-    public String dashboard(HttpServletRequest request, User user, Model model) {
+    public String dashboard(HttpServletRequest request, User user, Bill bill, Model model) {
         //for graphic
         Gson gson = new Gson();
 
         HttpSession session = request.getSession();
         User theUser = getUserFromSession(session);
+
+
 
         //if (id == null) {
           //  model.addAttribute("bill", billRepository.findAll());
@@ -55,7 +57,6 @@ public class DashboardController {
          //model.addAttribute("bill", billRepository.findAll());
          model.addAttribute("bill", theUser.getBills());
          model.addAttribute("username", theUser.getFirstName());
-
           //  }
         //}
 

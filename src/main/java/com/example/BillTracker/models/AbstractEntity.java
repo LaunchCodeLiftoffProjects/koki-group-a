@@ -3,6 +3,7 @@ package com.example.BillTracker.models;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.util.Objects;
 
 @MappedSuperclass
 public abstract class AbstractEntity {
@@ -23,5 +24,9 @@ public abstract class AbstractEntity {
         return id == that.id;
     }
 
-    public abstract boolean isMatchingPassword(String password);
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
 }

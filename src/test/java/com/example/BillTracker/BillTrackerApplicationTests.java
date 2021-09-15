@@ -29,12 +29,12 @@ class BillTrackerApplicationTests {
 //	}
 
 
-	//TODO: constructor sets Bill model properly
-	@Test
-	public void testSetBill() {
-		Bill test_bill = new Bill(45.00, "Dr. Otter's", "January 1, 2021", "Pet");
-		assertNotNull(test_bill);
-	}
+//	//TODO: constructor sets Bill model properly
+//	@Test
+//	public void testSetBill() {
+//		Bill test_bill = new Bill(45.00, "Dr. Otter's", "January 1, 2021", "Pet");
+//		assertNotNull(test_bill);
+//	}
 
 //	//TODO: constructor sets User model properly
 //	@Test

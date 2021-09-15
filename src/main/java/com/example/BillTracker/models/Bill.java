@@ -1,8 +1,7 @@
 package com.example.BillTracker.models;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -13,31 +12,29 @@ import java.util.List;
 import java.util.Locale;
 
 @Entity
+@Table(name = "bill")
 public class Bill extends AbstractEntity {
 
     private double amount;
     private String name;
+
+    @Transient
     private Date date;
+
     private String billDueDate;
     private String type;
 
-    @JoinColumn(name = "bill_id")
-    @OneToMany
-    private List<Bill> bills = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    //@NotNull(message = "User is required")
+    private User user;
 
-    public Bill(double amount, String name, Date date, String billDueDate, String type) {
+    public Bill(double amount, String billDueDate, String name, String type, User user) {
         this.amount = amount;
-        this.name = name;
-        this.date = date;
         this.billDueDate = billDueDate;
-        this.type = type;
-    }
-
-    public Bill(double amount, String name, String billDueDate, String type) {
-        this.amount = amount;
         this.name = name;
-        this.billDueDate = billDueDate;
         this.type = type;
+        this.user = user;
     }
 
     public Bill() {};
@@ -82,14 +79,21 @@ public class Bill extends AbstractEntity {
         this.billDueDate = billDueDate;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
+
     public LocalDate convertDateStringToDate(String stringDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.ENGLISH);
         LocalDate dueDate = LocalDate.parse(stringDate, formatter);
         return dueDate;
     }
 
-    @Override
-    public boolean isMatchingPassword(String password) {
-        return false;
-    }
+
 }

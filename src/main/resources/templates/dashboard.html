@@ -31,8 +31,7 @@
 </nav>
 
 <!------------------------ Insert first name into H2 ------------------------>
-<!--<h2 th:text="${user.firstName}">'s Dashboard</h2>-->
-<h2>first name's dashboard</h2>
+<h2 th:text="${username} + '\'s Dashboard'">Welcome to your Dashboard</h2>
 
 <!------------------------ Sample table, should eventual use database data ------------>
 <div class="col-md-8 bill-list">
@@ -50,9 +49,9 @@
 
 
         <tr th:each="bills : ${bill}" class="table-row">
-            <td th:text="${bills.name}"></td>
-            <td th:text="${bills.amount}"></td>
             <td th:text="${bills.billDueDate}"></td>
+            <td th:text="${bills.amount}"></td>
+            <td th:text="${bills.name}"></td>
             <td th:text="${bills.type}"></td>
             <form method = "post">
             <td>

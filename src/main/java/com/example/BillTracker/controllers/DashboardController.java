@@ -55,9 +55,11 @@ public class DashboardController {
             if (bills == null) {
                 model.addAttribute("title", "No bills yet");
             } else {
+                User theUser = getUserFromSession(session);
 //                String billDataJson = gson.toJson(bills);
 ////                model.addAttribute("billDataJson", billDataJson);
                 model.addAttribute("bill", bills);
+                model.addAttribute("username", theUser.getFirstName());
             }
         }
         return "dashboard"; }

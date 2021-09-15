@@ -87,13 +87,10 @@ public class Bill extends AbstractEntity {
         this.user = user;
     }
 
-
-
     public LocalDate convertDateStringToDate(String stringDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.ENGLISH);
         LocalDate dueDate = LocalDate.parse(stringDate, formatter);
         return dueDate;
     }
-
 
 }

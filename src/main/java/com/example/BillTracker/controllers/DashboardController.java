@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,21 +44,20 @@ public class DashboardController {
 
     @GetMapping("dashboard")
     public String dashboard(HttpSession session, Model model) {
-        Gson gson = new Gson();
 
         Integer userId = (Integer) session.getAttribute(userSessionKey);
 
         Optional<User> optUser = userRepository.findById(userId);
-        List<Bill> bills;
+
         if (optUser.isPresent()) {
             User user = (User) optUser.get();
-            bills = user.getBills();
-            if (bills == null) {
+//            Issue is that we have a circular reference?
+            if (user.getBills() == null) {
                 model.addAttribute("title", "No bills yet");
             } else {
-//                String billDataJson = gson.toJson(bills);
-////                model.addAttribute("billDataJson", billDataJson);
-                model.addAttribute("bill", bills);
+//                model.addAttribute("billDataJson", new Gson().toJson(user.getBills()));
+                model.addAttribute("bill", user.getBills());
+
             }
         }
         return "dashboard"; }

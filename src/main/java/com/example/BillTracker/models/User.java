@@ -1,5 +1,6 @@
 package com.example.BillTracker.models;
 
+import com.google.gson.Gson;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;

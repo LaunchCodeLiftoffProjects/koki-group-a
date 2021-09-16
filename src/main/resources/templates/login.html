@@ -21,8 +21,6 @@
     <header class="display-flex justify-space-between align-center p-2">
         <h1 class="heading">Bill Tracker</h1>
     </header>
-</div>
-
     <main class="container container-fluid mt-5">
         <!-- Render the sub layout -->
         <div class="row">
@@ -34,16 +32,14 @@
         <h2>Login</h2>
         <form  method = "post">
             <div class="form-group">
-                <label>E-mail
+                <label>E-mail</label>
                     <input class="form-control" th:field="${loginFormDTO.email}" type="email">
-                </label>
-                <p class="error" th:errors="${loginFormDTO.email}"></p>
+                    <p class="error" th:errors="${loginFormDTO.email}"></p>
             </div>
             <div class="form-group">
-                <label>Password
+                <label>Password</label>
                     <input class="form-control" th:field="${loginFormDTO.password}" type="password">
-                </label>
-                <p class="error" th:errors="${loginFormDTO.password}"></p>
+                    <p class="error" th:errors="${loginFormDTO.password}"></p>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">login</button>
@@ -51,7 +47,7 @@
         </form>
         <p class="registerpage">Don't have an account? <a href="/register">Register for one!</a></p>
     </div>
-</div>
+ </div>
 </main>
 </body>
 </html>

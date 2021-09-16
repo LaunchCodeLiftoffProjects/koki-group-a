@@ -42,25 +42,36 @@ public class DashboardController {
         return user.get();
     }
 
+//    @GetMapping("dashboard")
+//    public String dashboard(HttpSession session, Model model) {
+//
+//        Integer userId = (Integer) session.getAttribute(userSessionKey);
+//
+//        Optional<User> optUser = userRepository.findById(userId);
+//        if (optUser.isPresent()) {
+//            User user = (User) optUser.get();
+//            if (user.getBills() == null) {
+//                model.addAttribute("title", "No bills yet");
+//            } else {
+//                User theUser = getUserFromSession(session);
+//                Gson gson = new Gson();
+//                String billDataJson = gson.toJson(theUser.getBills());
+//                model.addAttribute("billDataJson", billDataJson);
+//                model.addAttribute("bill", theUser.getBills());
+//            }
+//        }
+//        return "dashboard"; }
+
     @GetMapping("dashboard")
-    public String dashboard(HttpSession session, Model model) {
+    public String dashboard(Model model) {
 
-        Integer userId = (Integer) session.getAttribute(userSessionKey);
-
-        Optional<User> optUser = userRepository.findById(userId);
-
-        if (optUser.isPresent()) {
-            User user = (User) optUser.get();
-//            Issue is that we have a circular reference?
-            if (user.getBills() == null) {
-                model.addAttribute("title", "No bills yet");
-            } else {
-//                model.addAttribute("billDataJson", new Gson().toJson(user.getBills()));
-                model.addAttribute("bill", user.getBills());
-
-            }
-        }
+//        User user = getUserFromSession(session);
+        Gson gson = new Gson();
+        String billDataJson = gson.toJson(billRepository.findAll());
+        model.addAttribute("billDataJson", billDataJson);
+        model.addAttribute("bill", billRepository.findAll());
         return "dashboard"; }
+
 
     @GetMapping("create-bill")
     public String createBill() {

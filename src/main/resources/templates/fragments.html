@@ -18,35 +18,40 @@
         function drawChart() {
          timeframe = document.getElementById("thedropdown").value;
 
-<!--Gets bill JSON from controller-->
+<!--Populates array with parsed bill objects-->
 
-          var billDataJson = [[${billDataJson}]];
-          var billObjects = JSON.parse(billDataJson);
+          const rawTypeAndAmountsObjArray = [];
 
-          const typeAndAmountsObjArray = [];
+          const rawBillData = [[${chartBillData}]]
+          for (item in rawBillData) {
+            const parsed = JSON.parse(rawBillData[item]);
+            rawTypeAndAmountsObjArray.push(parsed);
+          }
 
 <!--Loops through bills and adds to new array, checks to see if type is in new array-->
 
-          for (let i = 0; i < billObjects.length; i++) {
-            const type = billObjects[i].type;
-            const amount = billObjects[i].amount;
+          const condensedTypeAndAmountsObjArray = [];
+
+          for (bill in rawTypeAndAmountsObjArray) {
+            const type = rawTypeAndAmountsObjArray[bill].type;
+            const amount = rawTypeAndAmountsObjArray[bill].amount;
 
             let typeExistsInArray = false;
 
 <!--If type exists in array, add amount of current bill to existing type-->
 
-            if (typeAndAmountsObjArray.length > 0) {
-              for (let j = 0; j < typeAndAmountsObjArray.length; j++) {
-                if (type === typeAndAmountsObjArray[j].type) {
+            if (condensedTypeAndAmountsObjArray.length > 0) {
+              for (let i = 0; i < condensedTypeAndAmountsObjArray.length; i++) {
+                if (type === condensedTypeAndAmountsObjArray[i].type) {
                   typeExistsInArray = true;
-                  typeAndAmountsObjArray[j].amount += amount;
+                  condensedTypeAndAmountsObjArray[i].amount += amount;
                   break;
                 }
               }
             }
 
             if (!typeExistsInArray) {
-              typeAndAmountsObjArray.push({type: type, amount: amount});
+              condensedTypeAndAmountsObjArray.push({type: type, amount: amount});
             }
           }
 
@@ -55,7 +60,7 @@
 
 <!--Convert object array to array of arrays-->
 
-          typeAndAmountsObjArray.map((item, index) => {
+          condensedTypeAndAmountsObjArray.map((item, index) => {
             let innerChartData = [
               item.type, item.amount
             ];
@@ -95,6 +100,61 @@
 
     </script>
 </th:block>
+
+<!--<th:block th:fragment="chart-script">-->
+<!--  <script th:inline="javascript">-->
+<!--    window.onload = function() {-->
+
+<!--var dps = [[]];-->
+<!--var chart = new CanvasJS.Chart("chartContainer", {-->
+<!--	exportEnabled: true,-->
+<!--	animationEnabled: true,-->
+<!--	theme: "light2", // "light1", "dark1", "dark2"-->
+<!--	title: {-->
+<!--		text: "Visitor Demographics of a Website"-->
+<!--	},-->
+<!--	subtitles: [{-->
+<!--		text: "Age Groups of Visitors"-->
+<!--	}],-->
+<!--	data: [{-->
+<!--		type: "pie",-->
+<!--		yValueFormatString: "#,##0\"%\"",-->
+<!--		indexLabel: "{label} - {y}",-->
+<!--		dataPoints: dps[0]-->
+<!--	}]-->
+<!--});-->
+
+<!--var yValue;-->
+<!--var label;-->
+
+<!--<c:forEach items="${dataPointsList}" var="dataPoints" varStatus="loop">-->
+<!--	<c:forEach items="${dataPoints}" var="dataPoint">-->
+<!--		yValue = parseFloat("${dataPoint.y}");-->
+<!--		label = "${dataPoint.label}";-->
+<!--		dps[parseInt("${loop.index}")].push({-->
+<!--			label : label,-->
+<!--			y : yValue,-->
+<!--		});-->
+<!--	</c:forEach>-->
+<!--</c:forEach>-->
+
+<!--chart.render();-->
+
+<!--}-->
+<!--  </script>-->
+<!--</th:block>-->
+
+<!--<th:block th:fragment="chart-script">-->
+<!--  <script th:inline="javascript">-->
+<!--    const chartData = [[${chartBillData}]]-->
+<!--    for(item in chartData) {-->
+<!--      const parsed = JSON.parse(chartData[item]);-->
+<!--      console.log(parsed);-->
+<!--    }-->
+
+
+<!--  </script>-->
+<!--</th:block>-->
 
 </body>
 </html>

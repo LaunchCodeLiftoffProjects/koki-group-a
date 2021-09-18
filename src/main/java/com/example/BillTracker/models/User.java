@@ -7,7 +7,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "user")
@@ -66,4 +65,12 @@ public class User extends AbstractEntity {
         return bills;
     }
 
+    public List<String> billsToJson() {
+        List<String> billsAsString = new ArrayList<>();
+        for (Bill bill : bills) {
+            String billAsString = bill.toJson();
+            billsAsString.add(billAsString);
+        }
+        return billsAsString;
+    }
 }

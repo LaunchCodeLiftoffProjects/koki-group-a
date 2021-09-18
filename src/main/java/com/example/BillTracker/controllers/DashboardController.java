@@ -43,8 +43,6 @@ public class DashboardController {
 
     @GetMapping("dashboard")
     public String dashboard(HttpSession session, Model model) {
-        Gson gson = new Gson();
-
         Integer userId = (Integer) session.getAttribute(userSessionKey);
 
         Optional<User> optUser = userRepository.findById(userId);
@@ -56,8 +54,7 @@ public class DashboardController {
                 model.addAttribute("title", "No bills yet");
             } else {
                 User theUser = getUserFromSession(session);
-//                String billDataJson = gson.toJson(bills);
-////                model.addAttribute("billDataJson", billDataJson);
+                model.addAttribute("chartBillData", user.billsToJson());
                 model.addAttribute("bill", bills);
                 model.addAttribute("username", theUser.getFirstName());
             }

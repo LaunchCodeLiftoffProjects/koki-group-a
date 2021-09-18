@@ -87,7 +87,13 @@ public class Bill extends AbstractEntity {
         this.user = user;
     }
 
-
+    public String toJson() {
+        return "{" +
+                "\"name\":" + "\"" + name + "\"" +
+                ", \"amount\":" + amount +
+                ", \"type\":" + "\"" + type + "\"" +
+                '}';
+    }
 
     public LocalDate convertDateStringToDate(String stringDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.ENGLISH);

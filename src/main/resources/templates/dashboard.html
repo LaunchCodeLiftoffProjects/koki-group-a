@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Bill Tracker</title>
-    <link href="../static/css/jass.css" rel="stylesheet" />
-    <link href="../static/css/style.css" rel="stylesheet" />
+    <link href="css/jass.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
     <link href="css/chart.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
@@ -49,9 +49,9 @@
 
 
         <tr th:each="bills : ${bill}" class="table-row">
-            <td th:text="${bills.billDueDate}"></td>
-            <td th:text="${bills.amount}"></td>
             <td th:text="${bills.name}"></td>
+            <td th:text="${bills.amount}"></td>
+            <td th:text="${bills.billDueDate}"></td>
             <td th:text="${bills.type}"></td>
             <form method = "post">
             <td>
@@ -78,5 +78,5 @@
 </section>
 <th:block th:replace="fragments :: chart-script"></th:block>
 </body>
-<script src="../static/js/profile.js"></script>
+<script src="js/profile.js"></script>
 </html>

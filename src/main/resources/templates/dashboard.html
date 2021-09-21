@@ -47,7 +47,6 @@
 
         <tbody>
 
-
         <tr th:each="bills : ${bill}" class="table-row">
             <td th:text="${bills.name}"></td>
             <td th:text="${bills.amount}"></td>
@@ -60,7 +59,6 @@
             </form>
         </tr>
 
-
         </tbody>
     </table>
     <a href="/bill/create-bill"><button class="add-bill-button btn btn-sm btn-danger">Create a new bill</button></a>
@@ -68,14 +66,13 @@
 <!------------------------ Sample chart, should eventually use database data and chart API------------>
 <h4>How are you spending your money?</h4>
 <section class="chartContainer">
-    <form id="form1" name="form1" onchange="drawChart()" >
+    <form id="form1" name="form1" onchange="drawChart()">
         <select id="thedropdown">
-            <option value="weekly">Weekly</option>
-            <option value="monthly">Monthly</option>
         </select>
     </form>
     <div id="piechart" class="chart"></div>
 </section>
+<h4 id="totalExpenses">Total Expenses</h4>
 <th:block th:replace="fragments :: chart-script"></th:block>
 </body>
 <script src="js/profile.js"></script>

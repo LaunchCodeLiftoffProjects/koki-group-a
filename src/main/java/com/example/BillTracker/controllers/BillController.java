@@ -44,12 +44,13 @@ public class BillController {
     @GetMapping("create-bill")
     public String displayCreateBillForm(Model model) {
         model.addAttribute(new Bill());
+        model.addAttribute(new BillFormDTO());
         return "bill/create-bill";
     }
 
 
     @PostMapping("create-bill")
-    public String processCreateBillForm(@ModelAttribute @Valid BillFormDTO billFormDTO, HttpServletRequest request, Errors errors, User user, Model model) {
+    public String processCreateBillForm(@ModelAttribute @Valid BillFormDTO billFormDTO, Errors errors, HttpServletRequest request,  User user, Model model) {
 
         if(errors.hasErrors()) {
             return "bill/create-bill";

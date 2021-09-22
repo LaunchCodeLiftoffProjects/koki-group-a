@@ -1,21 +1,26 @@
 package com.example.BillTracker.models.dto;
 
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class BillFormDTO {
 
-
+    @NotNull(message = "Please enter bill amount")
+    @Min(1)
     private double amount;
 
-
+    @NotBlank(message = "Bill must have a name")
+    @Size(min = 1, max = 50, message = "Bill name must be between 1 and 50 characters.")
     private String name;
 
-
+    @NotBlank(message = "Please pick a bill due date")
     private String billDueDate;
 
-
+    @NotBlank(message = "Bill type must be between 1 and 50 characters.")
+    @Size(min = 1, max = 50)
     private String type;
 
     public double getAmount() {

@@ -1,14 +1,9 @@
 package com.example.BillTracker.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 @Entity
@@ -16,12 +11,14 @@ import java.util.Locale;
 public class Bill extends AbstractEntity {
 
     private double amount;
+
     private String name;
 
     @Transient
     private Date date;
 
     private String billDueDate;
+
     private String type;
 
     @ManyToOne

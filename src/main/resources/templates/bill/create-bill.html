@@ -35,23 +35,23 @@
     <form  method = "post" class="form new-bill-form">
       <div class="form-group">
        <label for="bill-name">✉️ Bill Name:</label>
-        <input th:field=${bill.name} class="form-input" type="text" id="bill-name" name="bill-name" />
-        <p th:errors="${bill.name}"></p>
+        <input th:field=${billFormDTO.name} class="form-input" type="text" id="bill-name" name="bill-name" />
+        <p th:errors="${billFormDTO.name}"></p>
       </div>
       <div class="form-group">
         <label for="bill-amount">💰 Amount:</label>
-        <input th:field=${bill.amount} class="form-input" type="text" id="bill-amount" name="bill-amount" />
-        <p th:errors="${bill.amount}"></p>
+        <input th:field=${billFormDTO.amount} class="form-input" type="text" id="bill-amount" name="bill-amount" />
+        <p th:errors="${billFormDTO.amount}"></p>
       </div>
       <div class="form-group">
         <label for="due-date">🗓️ Due Date:</label>
-        <input th:field=${bill.billDueDate} class="form-input datepicker" type="date" id="due-date" name="due-date" />
-        <p th:errors="${bill.billDueDate}"></p>
+        <input th:field=${billFormDTO.billDueDate} class="form-input datepicker" type="date" id="due-date" name="due-date" />
+        <p th:errors="${billFormDTO.billDueDate}"></p>
       </div>
       <div class="form-group">
         <label for="bill-type">🗂️ Bill Type:</label>
-        <input th:field=${bill.type} class="form-input" type="text" id="bill-type" name="bill-type">
-        <p th:errors="${bill.type}"></p>
+        <input th:field=${billFormDTO.type} class="form-input" type="text" id="bill-type" name="bill-type">
+        <p th:errors="${billFormDTO.type}"></p>
       </div>
       <div class="form-group">
         <button value="Create" type="submit" class="btn btn-primary">Add</button>

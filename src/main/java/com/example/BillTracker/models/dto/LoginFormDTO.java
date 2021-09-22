@@ -1,5 +1,6 @@
 package com.example.BillTracker.models.dto;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -8,7 +9,7 @@ public class LoginFormDTO {
 
     @NotNull
     @NotBlank
-    @Size(min = 1, max = 50, message = "Invalid username. Must be between 1 and 50 characters.")
+    @Email
     private String username;
 
     @NotNull

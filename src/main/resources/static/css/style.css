@@ -19,10 +19,13 @@ background-color:#757575;
 background-color:a6a6a6;
 }
 
-.add-bill-button {
-    margin-top: 4%;
-    margin-right:10%;
-    margin-left:10%;
+.sample-chart{
+width:50%;
+max-width:900px;
+min-width:500px;
+display: block;
+margin-left: auto;
+margin-right: auto;
 }
 
 .sample-chart{

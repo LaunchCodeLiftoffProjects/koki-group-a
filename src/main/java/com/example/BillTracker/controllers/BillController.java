@@ -6,6 +6,7 @@ import com.example.BillTracker.models.Bill;
 import com.example.BillTracker.models.User;
 import com.example.BillTracker.models.dto.BillFormDTO;
 import com.example.BillTracker.models.dto.LoginFormDTO;
+import com.example.BillTracker.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,18 +28,21 @@ import java.util.Optional;
 public class BillController {
 
     @Autowired
-    private BillRepository billRepository;
+    private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
+    private BillRepository billRepository;
 
-    private static final String userSessionKey = "user";
+//    @Autowired
+//    private UserRepository userRepository;
 
-    public User getUserFromSession(HttpSession session) {
-        Integer userId = (Integer) session.getAttribute(userSessionKey);
-        Optional<User> user = userRepository.findById(userId);
-        return user.get();
-    }
+//    private static final String userSessionKey = "user";
+
+//    public User getUserFromSession(HttpSession session) {
+//        Integer userId = (Integer) session.getAttribute(userSessionKey);
+//        Optional<User> user = userRepository.findById(userId);
+//        return user.get();
+//    }
 
 
     @GetMapping("create-bill")
@@ -57,7 +61,7 @@ public class BillController {
         }
 
         HttpSession session = request.getSession();
-        User theUser = getUserFromSession(session);
+        User theUser = userService.getUserFromSession(session);
 
         Bill newBill = new Bill(billFormDTO.getAmount(), billFormDTO.getBillDueDate(), billFormDTO.getName(), billFormDTO.getType(), theUser);
 

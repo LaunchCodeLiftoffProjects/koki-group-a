@@ -3,6 +3,7 @@ import com.example.BillTracker.data.UserRepository;
 import com.example.BillTracker.models.User;
 import com.example.BillTracker.models.dto.LoginFormDTO;
 import com.example.BillTracker.models.dto.RegisterFormDTO;
+import com.example.BillTracker.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,23 +21,12 @@ import java.util.Optional;
 public class AuthenticationController {
 
     @Autowired
-    UserRepository userRepository;
+    public UserService userService;
 
     private static final String userSessionKey = "user";
 
     public User getUserFromSession(HttpSession session) {
-        Integer userId = (Integer) session.getAttribute(userSessionKey);
-        if (userId == null) {
-            return null;
-        }
-
-        Optional<User> user = userRepository.findById(userId);
-
-        if (user.isEmpty()) {
-            return null;
-        }
-
-        return user.get();
+        return userService.getUserFromSession(session);
     }
 
     private static void setUserInSession(HttpSession session, User user) {
@@ -51,14 +41,13 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
-                                          Errors errors, HttpServletRequest request,
-                                          Model model) {
+                                          Errors errors, HttpServletRequest request) {
 
         if (errors.hasErrors()) {
             return "register";
         }
 
-        User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
+        User existingUser = userService.findByUsername(registerFormDTO.getUsername());
 
         if (existingUser != null) {
             errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists");
@@ -73,7 +62,7 @@ public class AuthenticationController {
         }
 
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getFirstName(), registerFormDTO.getLastName());
-        userRepository.save(newUser);
+        userService.saveUser(newUser);
         setUserInSession(request.getSession(), newUser);
 
         return "redirect:/login";
@@ -82,6 +71,7 @@ public class AuthenticationController {
     @GetMapping("/login")
     public String displayLoginForm(Model model) {
         model.addAttribute(new LoginFormDTO());
+
         return "login";
     }
 
@@ -95,7 +85,7 @@ public class AuthenticationController {
             return "login";
         }
 
-        User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
+        User theUser = userService.findByUsername(loginFormDTO.getUsername());
 
         if (theUser == null) {
             errors.rejectValue("username", "user.invalid", "The given username does not exist");
@@ -120,5 +110,5 @@ public class AuthenticationController {
         return "redirect:/login";
     }
 
-    }
+}
 

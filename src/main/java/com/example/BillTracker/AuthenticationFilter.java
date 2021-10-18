@@ -3,7 +3,9 @@ package com.example.BillTracker;
 import com.example.BillTracker.controllers.AuthenticationController;
 import com.example.BillTracker.data.UserRepository;
 import com.example.BillTracker.models.User;
+import com.example.BillTracker.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +15,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class AuthenticationFilter extends HandlerInterceptorAdapter {
-
-    @Autowired
-    UserRepository userRepository;
+public class AuthenticationFilter implements HandlerInterceptor {
 
     @Autowired
     AuthenticationController authenticationController;

@@ -33,18 +33,6 @@ public class BillController {
     @Autowired
     private BillRepository billRepository;
 
-//    @Autowired
-//    private UserRepository userRepository;
-
-//    private static final String userSessionKey = "user";
-
-//    public User getUserFromSession(HttpSession session) {
-//        Integer userId = (Integer) session.getAttribute(userSessionKey);
-//        Optional<User> user = userRepository.findById(userId);
-//        return user.get();
-//    }
-
-
     @GetMapping("create-bill")
     public String displayCreateBillForm(Model model) {
         model.addAttribute(new Bill());
@@ -52,9 +40,10 @@ public class BillController {
         return "bill/create-bill";
     }
 
-
     @PostMapping("create-bill")
-    public String processCreateBillForm(@ModelAttribute @Valid BillFormDTO billFormDTO, Errors errors, HttpServletRequest request,  User user, Model model) {
+    public String processCreateBillForm(@ModelAttribute @Valid BillFormDTO billFormDTO,
+                                        Errors errors, HttpServletRequest request,
+                                        User user, Model model) {
 
         if(errors.hasErrors()) {
             return "bill/create-bill";
@@ -63,7 +52,8 @@ public class BillController {
         HttpSession session = request.getSession();
         User theUser = userService.getUserFromSession(session);
 
-        Bill newBill = new Bill(billFormDTO.getAmount(), billFormDTO.getBillDueDate(), billFormDTO.getName(), billFormDTO.getType(), theUser);
+        Bill newBill = new Bill(billFormDTO.getAmount(), billFormDTO.getBillDueDate(),
+                billFormDTO.getName(), billFormDTO.getType(), theUser);
 
         billRepository.save(newBill);
 

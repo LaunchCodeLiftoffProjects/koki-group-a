@@ -4,6 +4,7 @@ import com.example.BillTracker.data.BillRepository;
 import com.example.BillTracker.data.UserRepository;
 import com.example.BillTracker.models.Bill;
 import com.example.BillTracker.models.User;
+import com.example.BillTracker.services.UserService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,43 +23,25 @@ public class DashboardController {
     private BillRepository billRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     private static final String userSessionKey = "user";
-
-    public User getUserFromSession(HttpSession session) {
-        Integer userId = (Integer) session.getAttribute(userSessionKey);
-        if (userId == null) {
-            return null;
-        }
-
-        Optional<User> user = userRepository.findById(userId);
-
-        if (user.isEmpty()) {
-            return null;
-        }
-
-        return user.get();
-    }
 
     @GetMapping("dashboard")
     public String dashboard(HttpSession session, Model model) {
         Integer userId = (Integer) session.getAttribute(userSessionKey);
-
-        Optional<User> optUser = userRepository.findById(userId);
+        User user = userService.findById(userId);
         List<Bill> bills;
-        if (optUser.isPresent()) {
-            User user = (User) optUser.get();
-            bills = user.getBills();
-            if (bills == null) {
-                model.addAttribute("title", "No bills yet");
-            } else {
-                User theUser = getUserFromSession(session);
-                model.addAttribute("chartBillData", user.billsToJson());
-                model.addAttribute("bill", bills);
-                model.addAttribute("username", theUser.getFirstName());
+        bills = user.getBills();
+
+        if (bills == null) {
+            model.addAttribute("title", "No bills yet");
+        } else {
+            model.addAttribute("chartBillData", user.billsToJson());
+            model.addAttribute("bill", bills);
+            model.addAttribute("username", user.getFirstName());
             }
-        }
+
         return "dashboard"; }
 
     @GetMapping("create-bill")

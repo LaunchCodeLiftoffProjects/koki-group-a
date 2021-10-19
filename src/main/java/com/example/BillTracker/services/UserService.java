@@ -1,11 +1,13 @@
 package com.example.BillTracker.services;
 
 import com.example.BillTracker.data.UserRepository;
+import com.example.BillTracker.models.Bill;
 import com.example.BillTracker.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,6 +35,12 @@ public class UserService {
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public User findById(Integer userId) {
+        Optional<User> optUser = userRepository.findById(userId);
+
+        return (User) optUser.orElse(null);
     }
 
     public void saveUser(User user) {

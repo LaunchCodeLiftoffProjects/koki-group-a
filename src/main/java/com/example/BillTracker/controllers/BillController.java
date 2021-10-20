@@ -6,6 +6,8 @@ import com.example.BillTracker.models.Bill;
 import com.example.BillTracker.models.User;
 import com.example.BillTracker.models.dto.BillFormDTO;
 import com.example.BillTracker.models.dto.LoginFormDTO;
+import com.example.BillTracker.services.BillService;
+import com.example.BillTracker.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,19 +29,10 @@ import java.util.Optional;
 public class BillController {
 
     @Autowired
-    private BillRepository billRepository;
+    private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
-
-    private static final String userSessionKey = "user";
-
-    public User getUserFromSession(HttpSession session) {
-        Integer userId = (Integer) session.getAttribute(userSessionKey);
-        Optional<User> user = userRepository.findById(userId);
-        return user.get();
-    }
-
+    private BillService billService;
 
     @GetMapping("create-bill")
     public String displayCreateBillForm(Model model) {
@@ -48,20 +41,21 @@ public class BillController {
         return "bill/create-bill";
     }
 
-
     @PostMapping("create-bill")
-    public String processCreateBillForm(@ModelAttribute @Valid BillFormDTO billFormDTO, Errors errors, HttpServletRequest request,  User user, Model model) {
+    public String processCreateBillForm(@ModelAttribute @Valid BillFormDTO billFormDTO,
+                                        Errors errors, HttpServletRequest request) {
 
         if(errors.hasErrors()) {
             return "bill/create-bill";
         }
 
         HttpSession session = request.getSession();
-        User theUser = getUserFromSession(session);
+        User theUser = userService.getUserFromSession(session);
 
-        Bill newBill = new Bill(billFormDTO.getAmount(), billFormDTO.getBillDueDate(), billFormDTO.getName(), billFormDTO.getType(), theUser);
+        Bill newBill = new Bill(billFormDTO.getAmount(), billFormDTO.getBillDueDate(),
+                billFormDTO.getName(), billFormDTO.getType(), theUser);
 
-        billRepository.save(newBill);
+        billService.saveBill(newBill);
 
         return "redirect:/dashboard";
     }

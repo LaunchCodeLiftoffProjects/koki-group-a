@@ -6,6 +6,7 @@ import com.example.BillTracker.models.Bill;
 import com.example.BillTracker.models.User;
 import com.example.BillTracker.models.dto.BillFormDTO;
 import com.example.BillTracker.models.dto.LoginFormDTO;
+import com.example.BillTracker.services.BillService;
 import com.example.BillTracker.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ public class BillController {
     private UserService userService;
 
     @Autowired
-    private BillRepository billRepository;
+    private BillService billService;
 
     @GetMapping("create-bill")
     public String displayCreateBillForm(Model model) {
@@ -42,8 +43,7 @@ public class BillController {
 
     @PostMapping("create-bill")
     public String processCreateBillForm(@ModelAttribute @Valid BillFormDTO billFormDTO,
-                                        Errors errors, HttpServletRequest request,
-                                        User user, Model model) {
+                                        Errors errors, HttpServletRequest request) {
 
         if(errors.hasErrors()) {
             return "bill/create-bill";
@@ -55,7 +55,7 @@ public class BillController {
         Bill newBill = new Bill(billFormDTO.getAmount(), billFormDTO.getBillDueDate(),
                 billFormDTO.getName(), billFormDTO.getType(), theUser);
 
-        billRepository.save(newBill);
+        billService.saveBill(newBill);
 
         return "redirect:/dashboard";
     }

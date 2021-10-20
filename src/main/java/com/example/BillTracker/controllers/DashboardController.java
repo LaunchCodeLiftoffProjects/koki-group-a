@@ -4,6 +4,7 @@ import com.example.BillTracker.data.BillRepository;
 import com.example.BillTracker.data.UserRepository;
 import com.example.BillTracker.models.Bill;
 import com.example.BillTracker.models.User;
+import com.example.BillTracker.services.BillService;
 import com.example.BillTracker.services.UserService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import java.util.Optional;
 public class DashboardController {
 
     @Autowired
-    private BillRepository billRepository;
+    private BillService billService;
 
     @Autowired
     private UserService userService;
@@ -31,8 +32,7 @@ public class DashboardController {
     public String dashboard(HttpSession session, Model model) {
         Integer userId = (Integer) session.getAttribute(userSessionKey);
         User user = userService.findById(userId);
-        List<Bill> bills;
-        bills = user.getBills();
+        List<Bill> bills = user.getBills();
 
         if (bills == null) {
             model.addAttribute("title", "No bills yet");
@@ -54,11 +54,9 @@ public class DashboardController {
 
         if (billIds !=null) {
             for (int id : billIds) {
-                billRepository.deleteById(id);
+                billService.deleteById(id);
             }
         }
         return "redirect:/dashboard";
     }
-
-
 }
